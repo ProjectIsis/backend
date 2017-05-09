@@ -27,6 +27,7 @@
         <module>service-discovery</module>
         <module>api-geteway</module>
         <module>hystrix-dashboard</module>
+        <module>oauth-server</module>
     </modules>
 
     <dependencies>
