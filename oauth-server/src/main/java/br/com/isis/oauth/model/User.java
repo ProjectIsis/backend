@@ -7,8 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -17,19 +16,25 @@ import java.util.Collection;
 
 @Data
 @Entity
+@Table(name = "ISIS_USER")
 public class User implements UserDetails {
 
+    @Id
     @GeneratedValue
+    @Column(name = "ID")
     private Long id;
 
     @NotEmpty
-    private Long name;
+    @Column(name = "NAME")
+    private String name;
 
     @NotEmpty
     @Email
+    @Column(name = "EMAIL")
     private String email;
 
     @NotEmpty
+    @Column(name = "PASSWORD")
     private String password;
 
     @Override
