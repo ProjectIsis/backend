@@ -26,6 +26,7 @@
         <module>config-server</module>
         <module>service-discovery</module>
         <module>api-geteway</module>
+        <module>hystrix-dashboard</module>
     </modules>
 
     <dependencies>
