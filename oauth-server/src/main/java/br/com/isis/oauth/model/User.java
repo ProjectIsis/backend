@@ -1,6 +1,8 @@
 package br.com.isis.oauth.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,8 +17,10 @@ import java.util.Collection;
  */
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "ISIS_USER")
+@Table(name = "USER")
 public class User implements UserDetails {
 
     @Id
@@ -30,7 +34,7 @@ public class User implements UserDetails {
 
     @NotEmpty
     @Email
-    @Column(name = "EMAIL")
+    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @NotEmpty

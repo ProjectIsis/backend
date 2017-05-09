@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
 
 /**
  * Created by João on 11/07/2016.
@@ -23,7 +22,6 @@ import org.springframework.security.oauth2.client.OAuth2ClientContext;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private UserDetailsService userDetailsService;
-    @Autowired private OAuth2ClientContext oauth2ClientContext;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
