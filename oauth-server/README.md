@@ -22,4 +22,7 @@ Api-Gateway
 
 | Path             | Description  |
 |------------------|--------------|
-| /oauth/token | Request token |
+| POST /oauth/token | Request token |
+| GET  /user | Returns a principal user |
+| POST /user | Register new user |
+| POST /user/password?passwordAnt=&passwordNew=&passwordConfirm= | Update password |

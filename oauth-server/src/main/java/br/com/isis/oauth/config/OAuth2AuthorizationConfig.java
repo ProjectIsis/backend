@@ -37,16 +37,19 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("hystrix")
                 .secret("hystrix")
+                .autoApprove(true)
                 .authorizedGrantTypes("authorization_code", "client_credentials")
                 .scopes("server").and()
 
                 .withClient("eureka")
                 .secret("eureka")
+                .autoApprove(true)
                 .authorizedGrantTypes("authorization_code", "client_credentials")
                 .scopes("server").and()
 
                 .withClient("app")
                 .secret("app")
+                .autoApprove(true)
                 .authorizedGrantTypes("authorization_code", "refresh_token", "password", "client_credentials")
                 .scopes("ui").and();
     }

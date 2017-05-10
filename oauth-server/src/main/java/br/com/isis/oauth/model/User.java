@@ -1,16 +1,23 @@
 package br.com.isis.oauth.model;
 
+import br.com.isis.oauth.enumeration.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by joao on 08/05/17.
@@ -19,31 +26,30 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "USER")
-public class User implements UserDetails {
+@Document
+public class User implements UserDetails, Serializable {
 
     @Id
-    @GeneratedValue
-    @Column(name = "ID")
-    private Long id;
+    private String id;
 
     @NotEmpty
-    @Column(name = "NAME")
     private String name;
 
     @NotEmpty
     @Email
-    @Column(name = "EMAIL", unique = true)
     private String email;
 
     @NotEmpty
-    @Column(name = "PASSWORD")
     private String password;
+
+    private String socialId;
+
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.NO_AUTHORITIES;
+        return roles.stream().map(e -> new SimpleGrantedAuthority(e.name()))
+                .collect(Collectors.toList());
     }
 
     @Override
