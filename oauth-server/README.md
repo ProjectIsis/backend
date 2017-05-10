@@ -15,7 +15,7 @@ $ java -jar target/*.jar
 ```
 
 ## Pre-requisites
-Mysql<br>
+MongoDB<br>
 Api-Gateway
 
 ## Resources
