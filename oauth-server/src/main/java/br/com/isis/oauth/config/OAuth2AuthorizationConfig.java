@@ -25,16 +25,30 @@ import java.security.KeyPair;
 @EnableAuthorizationServer
 public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired private AuthenticationManager authenticationManager;
-    @Autowired private UserDetailsService userDetailsService;
+    @Autowired
+    @Qualifier("authenticationManagerBean")
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("api")
-                .secret("api")
-                .authorizedGrantTypes("authorization_code", "refresh_token", "password")
-                .scopes("openid");
+                .withClient("hystrix")
+                .secret("hystrix")
+                .authorizedGrantTypes("authorization_code", "client_credentials")
+                .scopes("server").and()
+
+                .withClient("eureka")
+                .secret("eureka")
+                .authorizedGrantTypes("authorization_code", "client_credentials")
+                .scopes("server").and()
+
+                .withClient("app")
+                .secret("app")
+                .authorizedGrantTypes("authorization_code", "refresh_token", "password", "client_credentials")
+                .scopes("ui").and();
     }
 
     @Override
